@@ -1,0 +1,25 @@
+{
+    "name"              : "thewulf7/URLClass",
+    "description"       : "Abstract class to handle URL",
+    "authors"           : [
+        {
+            "name"  : "Evgenii Utkin",
+            "email" : "thewulf7@gmail.com"
+        }
+    ],
+    "config"            : {
+        "bin-dir" : "bin"
+    },
+    "autoload"          : {
+        "psr-4":{
+            "": "src/"
+        }
+    },
+    "require"           : {
+        "php": ">=5.4",
+        "phpunit/phpunit": "3.7.*",
+        "phpunit/php-invoker" : ">=1.1.0@stable"
+    },
+    "license": "MIT",
+    "minimum-stability" : "dev"
+}
