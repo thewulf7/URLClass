@@ -97,6 +97,8 @@ class URL
      */
     protected function fromString()
     {
+        $this->normalizeUrl();
+
         $urlArray = array_filter(parse_url($this->_url));
 
         if (count($urlArray) === 0)
@@ -119,6 +121,24 @@ class URL
                 $this->$prop = $value;
             }
         }
+    }
+
+    /**
+     * Normalize URL
+     */
+    protected function normalizeUrl()
+    {
+        $this->_url = preg_replace(
+            [
+                '/((\/([\w\.-]+)\/)?\.\.\/)/',
+                '/((\/([\w\.-]+)\/)?\.\/)/',
+            ],
+            [
+                '/',
+                '$2',
+            ],
+            $this->_url
+        );
     }
 
     /**

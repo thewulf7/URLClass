@@ -78,14 +78,25 @@ class URLTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  Should return url string when we try act with object as a string
+     *  Should return url string when we try act with object as a string: Absolute URL
      */
-    public function testObjectAsString()
+    public function testObjectAsStringAbsoluteURL()
     {
         $url       = 'http://www.gfk.com/Industries/industrial-goods/Pages/default.aspx';
         $urlObject = new URL($url);
 
         self::assertEquals($url, (string)$urlObject);
+    }
+
+    /**
+     *  Should return url string when we try act with object as a string: Relative URL
+     */
+    public function testObjectAsStringRelativeURL()
+    {
+        $url       = '/Industries/industrial-goods/../Pages/default.aspx';
+        $urlObject = new URL($url);
+
+        self::assertEquals('/Industries/Pages/default.aspx', (string)$urlObject);
     }
 
 
@@ -98,6 +109,17 @@ class URLTest extends \PHPUnit_Framework_TestCase
     public function testExceptionOnEmptyURL()
     {
         $urlObject = new URL('');
+    }
+
+    /**
+     *  Normalize url check
+     */
+    public function testNormalizeURL()
+    {
+        $url       = 'http://www.gfk.com/Industries/./industrial-goods/../Pages/default.aspx';
+        $urlObject = new URL($url);
+
+        self::assertEquals('http://www.gfk.com/Industries/Pages/default.aspx', (string)$urlObject);
     }
 
     /**
